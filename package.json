@@ -1,0 +1,8 @@
+{
+  "name": "albumcollage",
+  "main": "index.html",
+  "window": {
+    
+	"resizable": true
+  }
+}
