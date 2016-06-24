@@ -33,12 +33,15 @@ window.getIMG = function(i,j) {
 	var LastfmAPI = require('lastfmapi');
 	var lfm = new LastfmAPI({'api_key': '0cdd0fae9092776cc67729ebf4d9d8a3',
 							 'secret': 'deeca99c13c0060a5255762b5d18af35'});
+	
 	lfm.album.search({
 		'album' : searchterm,
 		'limit' : 5,
 		'page' : 1
 	}, function (err,album) {
-		if (err) {throw err;}
-		document.getElementById(selectedImg).src = 	album.albummatches.album[0].image[2]['#text']
+		if (err) {alert(err.error); throw err;}
+		
+		document.getElementById(selectedImg).src = album.albummatches.album[0].image[2]['#text'];
+		
 	});
 };
