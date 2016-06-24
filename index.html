@@ -3,24 +3,18 @@
 
 	<head>
 		<link href="album.css" rel="stylesheet"  type="text/css">
-		<script src = "albumart.js"></script>
+		<script src = "bundle.js"></script>
 	</head>
 	
-	<body> 
-	
+	<body style="background-color: white"> 
+		<div id="info" style="background-color: white">
+		Album Art Size (pixels): <input id="artsize" type="number"><br>
+		Number of Columns <input id="numCols" type="number"><br>
+		Number of Rows <input id="numRows" type="number"><br>
+		<button type="button" onclick="generateGrid()">Go!</button><br>
+		</div>
 		
-			Album Art Size: <select id="artSize" name="artSize">
-				<option value="100x100">100x100</option>
-				<option value="350x350">350x350</option>
-				<option value="500x500">500x500</option>
-				<option value="800x800">800x800</option>
-			</select><br>
-			Number of Columns <input id="numCols" type="number" name="numCols"><br>
-			Number of Rows <input id="numRows" type="number" name="numRows"><br>
-			<button type="button" onclick="generateGrid()">Go!</button>
-		
-		<div id="test"></div>
-		
+		<div id="albums"><br></div>
 	</body>
 	
 	

@@ -1,20 +1,15 @@
-var numCols;
-var numRows;
-var first = true;
+window.generateGrid = function() {
+	
+	var numCols = document.getElementById("numCols").value;
+	var numRows = document.getElementById("numRows").value;
+	
+	imgSize = document.getElementById("artsize").value;
 
-var generateGrid = function() {
+	document.getElementById("info").innerHTML = "";
 	
-	numCols = document.getElementById("numCols").value;
-	numRows = document.getElementById("numRows").value;
-	var par = document.getElementById("test");
-	
-	if (first == false) {
-		var trash = par.firstChild;
-		par.removeChild(trash);
-	}
+	var par = document.getElementById("albums");
 	
 	tab = document.createElement("TABLE");
-	first = false;
 	
 	par.appendChild(tab);
 	
@@ -29,23 +24,21 @@ var generateGrid = function() {
 			cell.appendChild(img);
 		}
 	}
-
+	
 }
 
-var getIMG = function(i,j) {
-	alert("HI")
-	var music = require('musicmatch')();
-	music.artistSearch({q: "gojira", page_size:1})
-	.then(function(artistFound) {
-		var artID = artistFound.message.body.artist_list[0].artist.artist_id;
-		
-		music.artistAlbums({artist_id: artID})
-		.then(function(albumsFound) {
-			var selectedImg = i.toString() + "," + j.toString();
-			document.getElementById(selectedImg).src = albumsFound.message.body.album_list[0].album.album_coverart_100x100;
-		});
-		
-		
+window.getIMG = function(i,j) {
+	var searchterm = prompt("Search for an album!");
+	var selectedImg = i.toString() + "," + j.toString();
+	var LastfmAPI = require('lastfmapi');
+	var lfm = new LastfmAPI({'api_key': '0cdd0fae9092776cc67729ebf4d9d8a3',
+							 'secret': 'deeca99c13c0060a5255762b5d18af35'});
+	lfm.album.search({
+		'album' : searchterm,
+		'limit' : 5,
+		'page' : 1
+	}, function (err,album) {
+		if (err) {throw err;}
+		document.getElementById(selectedImg).src = 	album.albummatches.album[0].image[2]['#text']
 	});
-	
 };
