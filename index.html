@@ -1,20 +1,144 @@
-<!DOCTYPE html>
+
 <html>
 
 	<head>
 		<link href="album.css" rel="stylesheet"  type="text/css">
-		<script src = "bundle.js"></script>
+		<script src = "https://code.jquery.com/jquery-3.1.0.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="album.css">
+		<script src="js/bootstrap.min.js"></script>
+
+		<style type="text/css">
+			img {
+				
+			}
+			#albums {
+				padding-top: 30px;
+				padding-bottom: 50px;
+				overflow-x: hidden;
+				background-color: #99ccff;
+				width: 100vw;
+				position: relative;
+				margin-left: -50vw;
+				left: 50%;
+			}
+			#header {
+				padding-top: 10px;
+				padding-bottom: 50px;
+				overflow-x: hidden;
+				background-color: #123456;
+				width: 100vw;
+				position: relative;
+				margin-left: -50vw;
+				left: 50%;
+				color: white;
+			}
+		</style>
+		<title>Album Collage Maker</title>
 	</head>
 	
-	<body style="background-color: white"> 
-		<div id="info" style="background-color: white">
-		Album Art Size (pixels): <input id="artsize" type="number"><br>
-		Number of Columns <input id="numCols" type="number"><br>
-		Number of Rows <input id="numRows" type="number"><br>
-		<button type="button" onclick="generateGrid()">Go!</button><br>
+	<body> 
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12 text-center" id="header">
+				<h1>Album Art Collage Maker</h1>
+				Click on a box to insert album art!
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-lg-3">
+				</div>
+				<div class="col-lg-3 ">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="inputColor" class="control-label col-lg-7">Background Color</label>
+							<div class="col-lg-5">
+							<input type="text" class="form-control" id="backcolor" value="#123456">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="inputColor" class="control-label col-lg-8"># of Rows</label>
+							<div class="col-lg-4">
+							<input type="text" class="form-control" id="numRows" value="3"></input>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="inputColor" class="control-label col-lg-8">Margin (in pixels)</label>
+							<div class="col-lg-4">
+							<input type="text" class="form-control" id="marginSize" value="5"></input>
+							</div>
+						</div>
+						
+						
+					</form>
+				</div>
+				<div class="col-lg-3">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="inputColor" class="control-label col-lg-7">Image Size (in pixels)</label>
+							<div class="col-lg-5">
+							<input type="text" class="form-control" id="artsize" value="100">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputColor" class="control-label col-lg-8"># of Columns</label>
+							<div class="col-lg-4">
+							<input type="text" class="form-control" id="numCols" value="10"></input>
+							</div>
+						</div>
+						
+						
+						<div align="center" class="col-lg-12">
+							<div align="right" class="col-lg-6">
+							<button type="button" class="btn-primary btn-md" onclick="generateGrid()">Update Collage</button>
+							
+							
+						
+						
+						</div>
+							<div align="right" class="col-lg-6">
+						<button type="button" class="btn-primary btn-md" onclick="shuffle()">Shuffle Images</button></div>
+						</div>
+						
+					</form>
+				</div>
+					
+				<div class="col-lg-3">
+				</div>
+			</div>
+			<hr>
+			<div width="100%" id="albums">
+			</div>
+			<div id="myModal" class="modal" role="dialog">
+				
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times; </button>
+								<h4 class="modal-title">Search for an album!</h4>
+							</div>
+							<div class="modal-body" id="modalBody">
+								<form>
+									<div class="form-group">
+										<input type="text" class="form-control" id="searchTerm" placeholder="Album + Artist">
+									</div>
+								</form>
+								<div id="albumsFound">
+									
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismss="modal" onclick="albumsearch()">Search!</button>
+							</div>
+						</div>
+					</div>
+				</div>
 		</div>
-		
-		<div id="albums"><br></div>
+		<script src = "albumart.js"></script>
 	</body>
 	
 	
