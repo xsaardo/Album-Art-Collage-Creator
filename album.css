@@ -1,16 +1,20 @@
 
 div {
-	font-size: 16px
+	font-size: 12px
 }
 
 img:hover {opacity: 0.7;}
 
 img {
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     cursor: pointer;
     transition: 0.3s;
 }
 
 button {
 	text-align: center
+}
+
+#firstrow {
+	padding-top: 15px;
 }

@@ -1,10 +1,51 @@
 // Execute upon page load
+var initialFlag = 1;
 $(window).on('load', function(){generateGrid();}); 
 
 var lastfm_apikey = "dc639df7a8d4027a6f8d66ba3f9eb0a2";
 
+var drag = function(ev) {
+	ev.dataTransfer.setData("text",ev.target.id);
+}
+
+var allowDrop = function(event) {
+	event.preventDefault();
+}
+
+var drop = function(ev) {
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+	var initialImg = document.getElementById(data).src;
+	document.getElementById(data).src = ev.target.src;
+	ev.target.src = initialImg;
+}
+
 // Generate grid of img objects
 window.generateGrid = function() {
+	
+	// Save current images if not initial load
+	if (!initialFlag) {
+		var prevNumRows = document.getElementById("numRows").value;
+		var prevNumCols = document.getElementById("numCols").value;
+		var imageMatrix = new Array();
+		var imageRow = new Array();
+		var saveImage;
+		for (var i = 0; i < prevNumRows; i++) {
+			for (var j = 0; j < prevNumCols; j++) {
+				saveImage = i.toString() + ',' + j.toString();
+				try {
+					imageRow.push(document.getElementById(saveImage).src);
+					console.log(document.getElementById(saveImage).src);
+				}
+				catch(err) {
+					imageRow.push("http://larics.rasip.fer.hr/wp-content/uploads/2016/04/default-placeholder.png");
+				}
+			}
+			imageMatrix.push(imageRow);
+			imageRow = [];
+		}
+	}
+	
 	// Background color
 	var backcolor = document.getElementById("backcolor").value;
 	backcolor = backcolor.toLowerCase();
@@ -38,7 +79,7 @@ window.generateGrid = function() {
 		albumHTML = albumHTML + '<div class="row"><div align="center" class="col-lg-12">' + '\n';
 		for (var j = 0; j < numCols; j++) {	
 			id = i.toString() + "," + j.toString();
-			albumHTML = albumHTML + '<a id="a" data-target="#myModal" data-toggle="modal" onclick="setCurID(event)"><img class="albumarts" width=' + imgSize + ' height=' + imgSize + '  src="http://larics.rasip.fer.hr/wp-content/uploads/2016/04/default-placeholder.png" id="' + id + '" alt="test"></a>';
+			albumHTML = albumHTML + '<a id="a" data-target="#myModal" data-toggle="modal" onclick="setCurID(event)"><img ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" class="albumarts" width=' + imgSize + ' height=' + imgSize + '  src="http://larics.rasip.fer.hr/wp-content/uploads/2016/04/default-placeholder.png" id="' + id + '" alt="test"></a>';
 		}
 		albumHTML = albumHTML + "</div></div>" + '\n';
 	}
@@ -50,6 +91,24 @@ window.generateGrid = function() {
 	$(document).ready(function () {
 		$('img').css('margin', marginSize + 'px');
 	});
+	
+	// Reinsert previous images
+	if (!initialFlag) {
+		for (i = 0; i < numRows; i++) {
+			imageRow = imageMatrix[i];
+			for (j = 0; j < numCols; j++) {
+				selectedImg = i.toString() + ',' + j.toString();
+				try {
+				document.getElementById(selectedImg).src = imageRow[j];
+				}
+				catch(err) {
+					
+				}
+			}
+		}
+	}
+	
+	initialFlag = 0;
 };
 
 // Get album art from last.fm search
