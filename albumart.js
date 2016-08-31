@@ -127,7 +127,7 @@ var albumsearch = function() {
 	var k = 0;
 	
 	
-	$.getJSON("http://ws.audioscrobbler.com/2.0?method=album.search&album="+ searchterm + "&api_key=" + lastfm_apikey + "&format=json&callback=?", function(json){
+	$.getJSON("https://ws.audioscrobbler.com/2.0?method=album.search&album="+ searchterm + "&api_key=" + lastfm_apikey + "&format=json&callback=?", function(json){
 		// Generate HTML for album grid
 		for (var i = 0; i < 2; i++) {
 			albumHTML = albumHTML + '<div class="row"><div align="center" class="col-lg-12">' + '\n';
@@ -210,7 +210,7 @@ var defaultAlbums = function() {
 	var i;
 	var j;
 	var artSouce;
-	$.getJSON("http://ws.audioscrobbler.com/2.0?method=album.search&album=" + searchterm + "&api_key=" + lastfm_apikey + "&format=json&callback=?", function(json){
+	$.getJSON("https://ws.audioscrobbler.com/2.0?method=album.search&album=" + searchterm + "&api_key=" + lastfm_apikey + "&format=json&callback=?", function(json){
 		for (i = 0; i < numRows; i++) {
 			for (j = 0; j < numCols; j++) {				
 				selectedImg = i.toString() + "," + j.toString();
