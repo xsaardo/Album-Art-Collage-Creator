@@ -143,7 +143,6 @@ var albumsearch = function() {
 			albumHTML = albumHTML + "</div></div>" + '\n';
 		}
 		$("#albumsFound").html(albumHTML); // Insert HTML
-		console.log(albumHTML);
 	});
 };
 
@@ -209,7 +208,7 @@ var defaultAlbums = function() {
 	var searchterm = String.fromCharCode(randLetter);
 	var i;
 	var j;
-	var artSouce;
+	var artSource;
 	$.getJSON("https://ws.audioscrobbler.com/2.0?method=album.search&album=" + searchterm + "&api_key=" + lastfm_apikey + "&format=json&callback=?", function(json){
 		for (i = 0; i < numRows; i++) {
 			for (j = 0; j < numCols; j++) {				
@@ -224,3 +223,11 @@ var defaultAlbums = function() {
 		}
 	});
 }
+
+
+/*
+	var canvasArea = document.getElementById("albums");
+	var t = canvasArea.getContext('2d');
+	window.open('', document.getElementById('albums').toDataURL());
+	*/
+
