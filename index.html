@@ -6,9 +6,8 @@
 		<script src = "https://code.jquery.com/jquery-3.1.0.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="album.css">
 		<script src="js/bootstrap.min.js"></script>
-
+		<link rel="stylesheet" type="text/css" href="album.css">
 		<style type="text/css">
 			img {
 				
@@ -39,11 +38,11 @@
 	</head>
 	
 	<body> 
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 text-center" id="header">
-				<h1>Album Art Collage Maker</h1>
-				Click on a box to insert album art &middot; Drag/drop to move images &middot; Change grid settings
+				<div class="col-lg-12 text-center jumbotron" id="header">
+				<h1><kbd>Album Art Collage Maker<kbd></h1>
+				<b>Instructions:</b> Click on a box to insert album art &middot; Drag/drop to move images &middot; Change grid settings
 				</div>
 			</div>
 			<div class="row" id="firstrow">
@@ -52,9 +51,9 @@
 				<div class="col-lg-3 ">
 					<form class="form-horizontal">
 						<div class="form-group">
-							<label for="inputColor" class="control-label col-lg-7">Background Color</label>
+							<label for="inputColor" class="control-label col-lg-7">Background Color (Hex)</label>
 							<div class="col-lg-5">
-							<input type="text" class="form-control" id="backcolor" value="#123456">
+							<input type="text" class="form-control" id="backcolor" value="#123456" placeholder="Hex Value">
 							</div>
 						</div>
 						
@@ -68,7 +67,7 @@
 						<div class="form-group">
 							<label for="inputColor" class="control-label col-lg-8">Margin (in pixels)</label>
 							<div class="col-lg-4">
-							<input type="text" class="form-control" id="marginSize" value="5"></input>
+							<input type="text" class="form-control" id="marginSize" value="0"></input>
 							</div>
 						</div>
 						
@@ -92,11 +91,11 @@
 						
 						
 						<div align="center" class="col-lg-12">
-							<div align="right" class="col-lg-6">
-							<button type="button" class="btn-primary btn-md" onclick="generateGrid()">Update Collage</button>
+							<div class="col-lg-6">
+								<button type="button" class="btn-info btn-sm" onclick="generateGrid()">Apply Settings</button>
 							</div>
-							<div align="right" class="col-lg-6">
-								<button type="button" class="btn-primary btn-md" onclick="shuffle()">Shuffle Images</button>
+							<div class="col-lg-6">
+								<button type="button" class="btn-success btn-sm" onclick="shuffle()">Shuffle Images</button>
 							</div>
 							
 						</div>
@@ -116,12 +115,12 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times; </button>
-								<h4 class="modal-title">Search for an album!</h4>
+								<h4 class="modal-title"><span class="glyphicon glyphicon-search"></span>  Search for an album  </h4>
 							</div>
 							<div class="modal-body" id="modalBody">
 								<form>
 									<div class="form-group">
-										<input type="text" class="form-control" id="searchTerm" placeholder="Album + Artist">
+										<input type="text" class="form-control" id="searchTerm" placeholder="Enter artist and/or album">
 									</div>
 								</form>
 								<div id="albumsFound">
@@ -129,7 +128,7 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismss="modal" onclick="albumsearch()">Search!</button>
+								<button type="button" class="btn btn-default" onclick="albumsearch()">Search!</button>
 							</div>
 						</div>
 					</div>
@@ -137,7 +136,7 @@
 		</div>
 		<script src = "albumart.js"></script>
 		<footer>
-		Programming is fun! - Cuong
+		<center><blockquote>Programming is fun!<footer><a href="https://github.com/xsaardo">Cuong</a></footer></blockquote></center>
 		</footer>
 	</body>
 	

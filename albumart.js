@@ -8,7 +8,6 @@ var placeholderImg = "http://larics.rasip.fer.hr/wp-content/uploads/2016/04/defa
 $(window).on('load', function(){generateGrid();}); 
 
 /*****Main Functionality*****/
-
 // Generate grid of img objects
 window.generateGrid = function() {
 	
@@ -69,7 +68,7 @@ window.generateGrid = function() {
 		albumHTML = albumHTML + '<div class="row"><div align="center" class="col-lg-12">' + '\n';
 		for (j = 0; j < numCols; j++) {	
 			id = i.toString() + "," + j.toString();
-			albumHTML = albumHTML + '<a id="a" data-target="#myModal" data-toggle="modal" onclick="setCurID(event)"><img ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" class="albumarts" width=' + imgSize + ' height=' + imgSize + '  src="http://larics.rasip.fer.hr/wp-content/uploads/2016/04/default-placeholder.png" id="' + id + '" alt="test"></a>';
+			albumHTML = albumHTML + '<a id="a" data-target="#myModal" data-toggle="modal" onclick="setCurID(event)"><img ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" class="albumarts" width=' + imgSize + ' height=' + imgSize + '  src="http://larics.rasip.fer.hr/wp-content/uploads/2016/04/default-placeholder.png" id="' + id + '" alt=""></a>';
 		}
 		albumHTML = albumHTML + "</div></div>" + '\n';
 	}
@@ -116,6 +115,15 @@ $('#searchTerm').on('keyup keypress', function(e) {
   }
 });
 
+$('.form-control').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+	generateGrid();
+    return false;
+  }
+});
+
 var albumsearch = function() {
 	var lastfm_apikey = "dc639df7a8d4027a6f8d66ba3f9eb0a2";
 	$('#searchTerm').focus();
@@ -132,7 +140,13 @@ var albumsearch = function() {
 		for (var i = 0; i < 2; i++) {
 			albumHTML = albumHTML + '<div class="row"><div align="center" class="col-lg-12">' + '\n';
 			for (var j = 0; j < 5; j++) {	
-				albumArtURL = json.results.albummatches.album[k].image[2]['#text'];
+				try{
+					albumArtURL = json.results.albummatches.album[k].image[2]['#text'];
+				}
+				catch(err){
+					albumArtURL = placeholderImg;
+				}
+				
 				if (albumArtURL === "") {
 					albumArtURL = placeholderImg;
 				}
@@ -152,8 +166,9 @@ var setCurID = function(event) {
 
 var chooseIMG = function(url) {
 	document.getElementById(curID).src = url.id;
-	$('#myModal').modal('hide');
 	document.getElementById("searchTerm").value = "";
+	$('#myModal').modal('hide');
+	
 };
 
 /*****Additional Features*****/
